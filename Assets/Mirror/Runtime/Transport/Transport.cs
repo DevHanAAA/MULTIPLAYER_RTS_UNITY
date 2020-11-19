@@ -9,7 +9,14 @@ namespace Mirror
 {
     // UnityEvent definitions
     [Serializable] public class ClientDataReceivedEvent : UnityEvent<ArraySegment<byte>, int> { }
-    [Serializable] public class UnityEventException : UnityEvent<Exception> { }
+    [Serializable]
+    public class UnityEventException : UnityEvent<Exception>
+    {
+        public void Invoke()
+        {
+            throw new NotImplementedException();
+        }
+    }
     [Serializable] public class UnityEventInt : UnityEvent<int> { }
     [Serializable] public class ServerDataReceivedEvent : UnityEvent<int, ArraySegment<byte>, int> { }
     [Serializable] public class UnityEventIntException : UnityEvent<int, Exception> { }
