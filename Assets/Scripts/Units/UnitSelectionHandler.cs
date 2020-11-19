@@ -12,7 +12,8 @@ public class UnitSelectionHandler : MonoBehaviour
     private Camera mainCamera;
 
     // Store all the unit currently selected 
-    private List <Unit> selectedUnits = new List<Unit>();
+    // Make List public so that UnitCommandGiver.cs can access
+    public List<Unit> SelectedUnits { get; } = new List<Unit>(); // List of Units
  
     private void Start()
     {
@@ -24,12 +25,12 @@ public class UnitSelectionHandler : MonoBehaviour
         if(Mouse.current.leftButton.wasPressedThisFrame)
         {
             
-            foreach (Unit selectedUnit in selectedUnits) 
+            foreach (Unit selectedUnit in SelectedUnits) 
             {
                 selectedUnit.Deselect();
             }
 
-            selectedUnits.Clear();
+            SelectedUnits.Clear();
         }
         else if(Mouse.current.leftButton.wasReleasedThisFrame)
         {
@@ -47,9 +48,9 @@ public class UnitSelectionHandler : MonoBehaviour
 
         if (!unit.hasAuthority) { return; }
 
-        selectedUnits.Add(unit); // Add to List
+        SelectedUnits.Add(unit); // Add to List
 
-        foreach(Unit selectedUnit in selectedUnits) // Select Unit
+        foreach(Unit selectedUnit in SelectedUnits) // Select Unit
         {
             selectedUnit.Select();
         }
